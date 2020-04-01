@@ -1,0 +1,5 @@
+folder_id                = "SET_YOUR_OWN_FOLDER_ID"
+cloud_id                 = "SET_YOUR_OWN_CLOUD_ID"
+service_account_key_file = "~/.yandex/key.json"
+public_key_path          = "~/.ssh/appuser.pub"
+user                     = "appuser"
