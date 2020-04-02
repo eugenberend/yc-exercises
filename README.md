@@ -13,7 +13,7 @@ Initialize cloud:
 yc init
 ```
 
-> Assume that you created a directory already. If not, [do](https://cloud.yandex.ru/docs/resource-manager/quickstart) this.
+> Assuming that you've created a directory already. If not, do [this](https://cloud.yandex.ru/docs/resource-manager/quickstart).
 
 Create service account:
 
@@ -47,7 +47,7 @@ Change current directory to ./terraform
 cd ./terraform
 ```
 
-Run initialization of Terraform
+Run Terraform initialization
 
 ```bash
 terraform init
@@ -59,24 +59,24 @@ Create your own tvfars file
 cp terraform.tfvars.example terraform.tfvars
 ```
 
-Set your own cloud/folder ID's in that file. You can get these ID's just typing `yc config list`. Don't forget to generate key pair for SSH access.
+Set your own cloud/folder ID in that file. You can get these ID with `yc config list`. Don't forget to generate SSH keys.
 
 Apply infra.
 
 ```bash
 terraform plan
-# If no errors present, then run:
+# If no error present run:
 terraform apply
 yes
 ```
 
-Terraform ouputs a public IP address of instance. Use it to ssh on host:
+Terraform ouputs public IP address of the instance. Use it to ssh to the host:
 
 ```bash
 ssh -i ~/.ssh/<username> <username>@<ip address>
 ```
 
-Ensure that hostname was changed accordingly to the `hostname` argument in the instance resource.
+Ensure that hostname has been changed according to the `hostname` argument in the instance resource.
 
 Do not forget to destroy everything:
 
@@ -103,16 +103,16 @@ Install docker-machine plugin
 go get -u github.com/yandex-cloud/docker-machine-driver-yandex
 ```
 
-The plugin was installed to `$HOME/go/bin`, which isn't observable by `docker-machine`. So you should add `$HOME/go/bin` to your PATH environment variable.
+The plugin has been installed in `$HOME/go/bin`. Make sure this path is in your `PATH` environment variable.
 
-Set your YC folder id and SA key path (see Terraform section):
+Set your YC folder ID and SA key path (see Terraform section):
 
 ```bash
 FOLDER_ID="SET_YOUR_OWN_ID"
 SA_KEY_PATH="/SET/YOUR/OWN/PATH"
 ```
 
-Create machine
+Create Docker host
 
 ```bash
 docker-machine create \
@@ -121,16 +121,16 @@ docker-machine create \
     --yandex-platform-id "standard-v1" \
     --yandex-folder-id $FOLDER_ID \
     --yandex-sa-key-file $SA_KEY_PATH \
-    docker-machine-yc
+    docker-host
 ```
 
-Connect to docker-machine docker engine:
+Connect to docker-host docker engine:
 
 ```bash
-eval $(docker-machine env docker-machine-yc)
+eval $(docker-machine env docker-host)
 ```
 
-Run `docker run hello-world` to ensure that everything is worked fine.
+Run `docker run hello-world` to make sure that everything is working fine.
 
 
 </details>
