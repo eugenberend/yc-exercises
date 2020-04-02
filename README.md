@@ -1,5 +1,5 @@
 <details>
-    <summary>Play terraform in YC</summary>
+    <summary>Terraform in YC</summary>
 
 Install yandex cloud CLI:
 
@@ -83,5 +83,58 @@ Do not forget to destroy everything:
 ```bash
 terraform destroy -auto-approve
 ```
+
+</details>
+
+<details>
+    <summary>Docker-machine in YC</summary>
+
+Install go
+
+```bash
+sudo add-apt-repository ppa:longsleep/golang-backports
+sudo apt update
+sudo apt install golang-go
+```
+
+Install docker-machine plugin
+
+```bash
+go get -u github.com/yandex-cloud/docker-machine-driver-yandex
+```
+
+The plugin was installed to `$HOME/go/bin`, which isn't observable by `docker-machine`, let's copy it into `/usr/local/bin/`
+
+```bash
+sudo cp $HOME/go/bin/docker-machine-driver-yandex /usr/local/bin
+```
+
+Set your YC folder id and SA key path (see Terraform section):
+
+```bash
+FOLDER_ID="SET_YOUR_OWN_ID"
+SA_KEY_PATH="/SET/YOUR/OWN/PATH"
+```
+
+Create machine
+
+```bash
+docker-machine create \
+    --driver yandex \
+    --yandex-image-family "ubuntu-1804-lts" \
+    --yandex-platform-id "standard-v1" \
+    --yandex-folder-id $FOLDER_ID \
+    --yandex-sa-key-file $SA_KEY_PATH \
+    docker-machine-yc
+```
+
+Connect to docker-machine docker engine:
+
+```bash
+eval $(docker-machine env docker-machine-yc)
+```
+
+Run `docker run hello-world` to ensure that everything is worked fine.
+
 
 </details>
