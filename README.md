@@ -103,11 +103,7 @@ Install docker-machine plugin
 go get -u github.com/yandex-cloud/docker-machine-driver-yandex
 ```
 
-The plugin was installed to `$HOME/go/bin`, which isn't observable by `docker-machine`, let's copy it into `/usr/local/bin/`
-
-```bash
-sudo cp $HOME/go/bin/docker-machine-driver-yandex /usr/local/bin
-```
+The plugin was installed to `$HOME/go/bin`, which isn't observable by `docker-machine`. So you should add `$HOME/go/bin` to your PATH environment variable.
 
 Set your YC folder id and SA key path (see Terraform section):
 
