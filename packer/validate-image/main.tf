@@ -4,8 +4,9 @@ provider "yandex" {
   folder_id = var.folder_id
 }
 
-data "yandex_compute_image" "ubuntu1804" {
-  family = "ubuntu-1804-lts"
+data "yandex_compute_image" "reddit" {
+  family = var.family
+  folder_id = var.folder_id # If you specify family without folder_id then lookup takes place in the 'standard-images' folder.
 }
 
 resource "yandex_compute_instance" "mydefault" {
@@ -21,13 +22,13 @@ resource "yandex_compute_instance" "mydefault" {
 
   boot_disk {
     initialize_params {
-      image_id = data.yandex_compute_image.ubuntu1804.image_id
+      image_id = data.yandex_compute_image.reddit.image_id
     }
   }
 
   network_interface {
     subnet_id = yandex_vpc_subnet.mydefault.id
-    nat       = true
+    nat       = "true"
   }
 
   metadata = {
@@ -39,6 +40,24 @@ resource "yandex_compute_instance" "mydefault" {
         hostname   = var.name
       }
     )
+  }
+
+  connection {
+    type        = "ssh"
+    host        = yandex_compute_instance.mydefault.network_interface.0.nat_ip_address
+    user        = "appuser"
+    agent       = false
+    private_key = file(var.private_key_path)
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo apt-get update",
+      "sudo apt-get install -y git",
+      "git clone -b monolith https://github.com/express42/reddit.git",
+      "cd reddit && bundle install",
+      "puma -d"
+    ]
   }
 }
 
