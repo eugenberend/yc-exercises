@@ -1,0 +1,5 @@
+{
+    "service_account_key_file": "PUT_YOUR_OWN_PATH",
+    "folder_id": "PUT_YOUR_OWN_ID",
+    "image_family": "reddit-base"
+}

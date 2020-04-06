@@ -1,0 +1,8 @@
+folder_id                = "PUT_YOUR_OWN_FOLDER_ID"
+cloud_id                 = "PUT_YOUR_OWN_CLOUD_ID"
+service_account_key_file = "PUT_YOUR_OWN_SA_KEY_PATH"
+public_key_path          = "PUT_YOUR_OWN_PUBLIC_KEY_PATH"
+user                     = "PUT_YOUR_OWN_USERNAME"
+family                   = "reddit-base"
+name                     = "reddit"
+private_key_path         = "PUT_YOUR_OWN_PRIVATE_KEY_PATH"

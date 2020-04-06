@@ -134,3 +134,34 @@ Run `docker run hello-world` to make sure that everything is working fine.
 
 
 </details>
+
+<details>
+    <summary>Packer in YC</summary>
+
+Run `cd packer`
+
+Run `cp variables.json.example variables.json` and put your own variable values
+
+To validate template, run:
+
+```bash
+packer validate -var-file=variables.json ubuntu16.json
+```
+
+To build image, run:
+
+```bash
+packer build -var-file=variables.json ubuntu16.json
+```
+
+To build VM from image, run:
+
+```bash
+cd validate-image
+cp terraform.tfvars.example terraform.tfvars
+# Populate terraform.tfvars with your own values
+terraform plan
+terraform apply
+```
+
+</details>

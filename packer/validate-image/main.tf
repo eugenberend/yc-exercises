@@ -45,7 +45,7 @@ resource "yandex_compute_instance" "mydefault" {
   connection {
     type        = "ssh"
     host        = yandex_compute_instance.mydefault.network_interface.0.nat_ip_address
-    user        = "appuser"
+    user        = var.user
     agent       = false
     private_key = file(var.private_key_path)
   }
