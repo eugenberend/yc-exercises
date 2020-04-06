@@ -9,7 +9,7 @@
             "type": "yandex",
             "service_account_key_file": "{{user `service_account_key_file`}}",
             "folder_id": "{{user `folder_id`}}",
-            "source_image_id": "fd87nv867bqvd6fdimdq",
+            "source_image_family": "ubuntu-1604-lts",
             "image_name": "reddit-base-{{timestamp}}",
             "image_family": "{{user `image_family`}}",
             "ssh_username": "ubuntu",
