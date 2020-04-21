@@ -14,3 +14,7 @@ variable user {
 variable token {
   default = ""
 }
+variable family {
+}
+variable private_key_path {
+}
